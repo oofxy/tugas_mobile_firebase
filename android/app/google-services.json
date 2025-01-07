@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "369614081319",
+    "project_id": "sigma-est-boy-ever-existed",
+    "storage_bucket": "sigma-est-boy-ever-existed.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:369614081319:android:fcfc3bc9a41cdcced0ed02",
+        "android_client_info": {
+          "package_name": "com.example.tugas_mobile_firebase"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "369614081319-b48n0k0ijf3lbn07097p8omethctd4kh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA9O3pLBbPUJBH6ZDFUYi6uKYdiThf2En4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "369614081319-b48n0k0ijf3lbn07097p8omethctd4kh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
