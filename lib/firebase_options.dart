@@ -51,7 +51,7 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyA9O3pLBbPUJBH6ZDFUYi6uKYdiThf2En4',
-    appId: '1:369614081319:android:94c2bf8843201f75d0ed02',
+    appId: '1:369614081319:android:cbb29de389b9e807d0ed02',
     messagingSenderId: '369614081319',
     projectId: 'sigma-est-boy-ever-existed',
     storageBucket: 'sigma-est-boy-ever-existed.firebasestorage.app',
@@ -66,4 +66,5 @@ class DefaultFirebaseOptions {
     iosClientId: '369614081319-b1jf695ih97pgdomc630nsvgdur1ihni.apps.googleusercontent.com',
     iosBundleId: 'com.example.tugasMobileFirebase',
   );
+
 }
