@@ -1,6 +1,6 @@
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:tugas_mobile_firebase/services/firestore_service.dart';
+import 'package:tugas_mobile_firebase/wiged/note_listview.dart';
 
 class NotePage extends StatelessWidget {
   const NotePage({super.key});
@@ -9,31 +9,48 @@ class NotePage extends StatelessWidget {
   Widget build(BuildContext context) {
     final FirestoreService firestoreService = FirestoreService();
     final TextEditingController noteController = TextEditingController();
+
     return Scaffold(
       appBar: AppBar(
-        title: Text("Notes"),
+        title: const Text("Notes"),
       ),
-      body: Expanded(
-          child: Center(
+      body: Column(
+        children: [
+          // Tampilkan NoteListview di bagian atas
+          const Expanded(
+            child: NoteListview(),
+          ),
+          // Tombol tambah catatan
+          Padding(
+            padding: const EdgeInsets.all(8.0),
             child: ElevatedButton(
               onPressed: () {
-                showDialog(context: context, builder: (context) => AlertDialog(
-                  content: TextField(
-                    controller: noteController,
-                  ),
-                  actions: [
-                    ElevatedButton(
-                        onPressed: (){
+                showDialog(
+                  context: context,
+                  builder: (context) => AlertDialog(
+                    content: TextField(
+                      controller: noteController,
+                      decoration: const InputDecoration(
+                        hintText: "Enter your note",
+                      ),
+                    ),
+                    actions: [
+                      ElevatedButton(
+                        onPressed: () {
                           firestoreService.addNote(noteController.text);
+                          noteController.clear();
+                          Navigator.of(context).pop();
                         },
-                        child: Text("Add")
-                    )
-                  ],
-                ));
+                        child: const Text("Add"),
+                      ),
+                    ],
+                  ),
+                );
               },
-              child: Icon(Icons.add)
+              child: const Icon(Icons.add),
             ),
-        )
+          ),
+        ],
       ),
     );
   }
