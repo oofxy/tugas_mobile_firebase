@@ -7,6 +7,7 @@ class NoteListview extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final TextEditingController noteController = TextEditingController();
     final FirestoreService firestoreService = FirestoreService();
     return Scaffold(
       body: StreamBuilder<QuerySnapshot>(
@@ -28,6 +29,32 @@ class NoteListview extends StatelessWidget {
 
                   return ListTile(
                     title: Text(noteText),
+                    trailing: IconButton(
+                        onPressed: () {
+                          showDialog(
+                            context: context,
+                            builder: (context) => AlertDialog(
+                              content: TextField(
+                                controller: noteController,
+                                decoration: const InputDecoration(
+                                  hintText: "Update your current note",
+                                ),
+                              ),
+                              actions: [
+                                ElevatedButton(
+                                  onPressed: () {
+                                    firestoreService.updateNote(docID, noteController.text);
+                                    noteController.clear();
+                                    Navigator.of(context).pop();
+                                  },
+                                  child: const Text("Add"),
+                                ),
+                              ],
+                            ),
+                          );
+                        },
+                        icon: Icon(Icons.edit, size: 20,)
+                    ),
                   );
                 },
               );
