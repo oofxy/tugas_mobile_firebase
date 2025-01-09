@@ -29,32 +29,66 @@ class NoteListview extends StatelessWidget {
 
                   return ListTile(
                     title: Text(noteText),
-                    trailing: IconButton(
-                        onPressed: () {
-                          showDialog(
-                            context: context,
-                            builder: (context) => AlertDialog(
-                              content: TextField(
-                                controller: noteController,
-                                decoration: const InputDecoration(
-                                  hintText: "Update your current note",
+                    trailing: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        IconButton(
+                            onPressed: () {
+                              showDialog(
+                                context: context,
+                                builder: (context) => AlertDialog(
+                                  content: TextField(
+                                    controller: noteController,
+                                    decoration: const InputDecoration(
+                                      hintText: "Update your current note",
+                                    ),
+                                  ),
+                                  actions: [
+                                    ElevatedButton(
+                                      onPressed: () {
+                                        firestoreService.updateNote(docID, noteController.text);
+                                        noteController.clear();
+                                        Navigator.of(context).pop();
+                                      },
+                                      child: const Text("Add"),
+                                    ),
+                                  ],
                                 ),
+                              );
+                            },
+                            icon: Icon(Icons.edit, size: 20,)
+                        ),
+                        //deleted button
+                        IconButton(
+                          onPressed: () {
+                            showDialog(
+                              context: context,
+                              builder: (context) => AlertDialog(
+                                content: const Text("Are you sure you want to delete this note?"),
+                                actions: [
+                                  ElevatedButton(
+                                    onPressed: () {
+                                      firestoreService.deleteNote(docID); // Aksi untuk menghapus
+                                      noteController.clear(); // Membersihkan teks controller
+                                      Navigator.of(context).pop(); // Menutup dialog
+                                    },
+                                    child: const Text("YES"),
+                                  ),
+                                  ElevatedButton(
+                                    onPressed: () {
+                                      Navigator.of(context).pop(); // Menutup dialog tanpa melakukan apa-apa
+                                    },
+                                    child: const Text("NO"),
+                                  ),
+                                ],
                               ),
-                              actions: [
-                                ElevatedButton(
-                                  onPressed: () {
-                                    firestoreService.updateNote(docID, noteController.text);
-                                    noteController.clear();
-                                    Navigator.of(context).pop();
-                                  },
-                                  child: const Text("Add"),
-                                ),
-                              ],
-                            ),
-                          );
-                        },
-                        icon: Icon(Icons.edit, size: 20,)
-                    ),
+                            );
+                          },
+                          icon: const Icon(Icons.delete, size: 20),
+
+                        ),
+                      ],
+                    )
                   );
                 },
               );
