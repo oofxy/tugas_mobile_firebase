@@ -231,7 +231,8 @@ packages:
     dependency: transitive
     description: flutter
     source: sdk
-    version: "0.0.0"get:
+    version: "0.0.0"
+  get:
     dependency: "direct main"
     description:
       name: get
