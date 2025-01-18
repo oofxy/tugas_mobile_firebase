@@ -11,14 +11,13 @@ class SplashPage extends StatelessWidget {
     // Use GetX observer to react to sign-in state change
     return Obx(() {
       if (firebaseController.isSignedIn.value) {
-        // Navigate to the home page if the user is signed in
-        Future.delayed(Duration(seconds: 2), () {
-          Get.offAllNamed(AppRoot.home);
+        // Ensure navigation happens only once
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          Get.offNamed(AppRoot.dashboard);
         });
       } else {
-        // Navigate to the login page if not signed in
-        Future.delayed(Duration(seconds: 2), () {
-          Get.offAllNamed(AppRoot.login);
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          Get.offNamed(AppRoot.login);
         });
       }
       return Scaffold(

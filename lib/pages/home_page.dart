@@ -1,31 +1,56 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:tugas_mobile_firebase/controllers/auth_controller.dart';
-
-import '../route/app_route.dart';
+import 'package:tugas_mobile_firebase/services/firestore_service.dart';
+import 'package:tugas_mobile_firebase/wiged/note_listview.dart';
 
 class HomePage extends StatelessWidget {
-  final FirebaseController firebaseController = Get.find();
+  const HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final FirestoreService firestoreService = FirestoreService();
+    final TextEditingController noteController = TextEditingController();
+
     return Scaffold(
-      appBar: AppBar(title: Text('Home')),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text('Welcome, ${firebaseController.user.value?.displayName ?? 'User'}'),
-            SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: () async {
-                await firebaseController.signOut();
-                Get.offAllNamed(AppRoot.login);
+      appBar: AppBar(
+        title: const Text("Notes"),
+      ),
+      body: Column(
+        children: [
+          // Tampilkan NoteListview di bagian atas
+          const Expanded(
+            child: NoteListview(),
+          ),
+          // Tombol tambah catatan
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: ElevatedButton(
+              onPressed: () {
+                showDialog(
+                  context: context,
+                  builder: (context) => AlertDialog(
+                    content: TextField(
+                      controller: noteController,
+                      decoration: const InputDecoration(
+                        hintText: "Enter your note",
+                      ),
+                    ),
+                    actions: [
+                      ElevatedButton(
+                        onPressed: () {
+                          firestoreService.addNote(noteController.text);
+                          noteController.clear();
+                          Navigator.of(context).pop();
+                        },
+                        child: const Text("Add"),
+                      ),
+                    ],
+                  ),
+                );
               },
-              child: Text('Sign Out'),
+              child: const Icon(Icons.add),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
