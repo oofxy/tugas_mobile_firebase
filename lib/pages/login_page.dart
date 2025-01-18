@@ -16,7 +16,9 @@ class LoginPage extends StatelessWidget {
           onPressed: () async {
             await firebaseController.signInWithGoogle();
             if (firebaseController.isSignedIn.value) {
-              Get.toNamed(AppRoot.home);
+              Get.toNamed(AppRoot.dashboard);
+              print("Navigating to: ${AppRoot.dashboard}"); // In SplashPage or LoginPage
+
             }
           },
           child: Text('Sign In with Google'),
