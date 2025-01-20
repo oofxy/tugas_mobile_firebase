@@ -8,10 +8,7 @@ import '../style/colors.dart';
 import 'note_card_popup.dart';
 
 class NoteCard extends StatelessWidget {
-  NoteCard({super.key, required this.model});
-
   final ValueNotifier<bool> _isHighlighted = ValueNotifier(false);
-  final NoteModel model;
 
   void _showCustomDialog(BuildContext context, GlobalKey widgetKey) {
     final RenderBox renderBox = widgetKey.currentContext!.findRenderObject() as RenderBox;
@@ -24,23 +21,24 @@ class NoteCard extends StatelessWidget {
         return GestureDetector(
           onTap: () {
             overlayEntry?.remove();
+            _isHighlighted.value = false;
           },
           child: Material(
             color: Colors.transparent, // Transparent background
             child: Stack(
               children: [
                 Positioned(
-                  top: position.dy + 5, // Top position of the widget
-                  right: MediaQuery.of(context).size.width - (position.dx + size.width) + 5,
-                  child: GestureDetector(
-                    onTap: () {},
-                    child: Stack(
-                      children: [
-                        Blur(child: Container(color: AppColors.secondary, width: 155, height: 92,), blur: 3),
-                        NoteCardPopup()
-                      ],
+                    top: position.dy + 5, // Top position of the widget
+                    right: MediaQuery.of(context).size.width - (position.dx + size.width) + 5,
+                    child: GestureDetector(
+                        onTap: () {},
+                        child: Stack(
+                          children: [
+                            Blur(child: Container(color: AppColors.secondary, width: 155, height: 92,), blur: 3),
+                            NoteCardPopup()
+                          ],
+                        )
                     )
-                  )
                 ),
               ],
             ),
@@ -70,9 +68,9 @@ class NoteCard extends StatelessWidget {
               child: InkWell(
                 splashColor: Colors.transparent,
                 highlightColor: Colors.transparent,
-                onLongPress: () => _showCustomDialog(context, widgetKey),
-                onHighlightChanged: (isHighlighted) {
-                  _isHighlighted.value = isHighlighted;
+                onLongPress: () {
+                  _showCustomDialog(context, widgetKey);
+                  _isHighlighted.value = true;
                 },
                 onTap: () {},
                 child: Container(
@@ -126,22 +124,18 @@ class NoteCard extends StatelessWidget {
                               mainAxisSize: MainAxisSize.min,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Row(
-                                  children: [
-                                    Text(
-                                      "Les Tittle.",
-                                      style: TextStyle(
-                                          fontFamily: "Montserrat",
-                                          fontWeight: FontWeight.w700,
-                                          fontSize: 14.0
-                                      ),
-                                    ),
-                                    Spacer(),
-                                    GestureDetector(
-                                        onTap: () => _showCustomDialog(context, widgetKey),
-                                        child: Icon(Icons.more_vert, size: 18.0)
-                                    )
-                                  ],
+                                Text(
+                                  "Les Tittle.",
+                                  style: TextStyle(
+                                      fontFamily: "Montserrat",
+                                      fontWeight: FontWeight.w700,
+                                      fontSize: 14.0
+                                  ),
+                                ),
+                                Spacer(),
+                                GestureDetector(
+                                    onTap: () => _showCustomDialog(context, widgetKey),
+                                    child: Icon(Icons.more_vert, size: 18.0)
                                 ),
                                 SizedBox(height: 5.0),
                                 Container(
