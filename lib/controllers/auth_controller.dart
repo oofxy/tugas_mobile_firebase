@@ -2,6 +2,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
+import '../route/app_route.dart';
+
 class FirebaseController extends GetxController {
   var isSignedIn = false.obs;
   var user = Rxn<User>();
@@ -43,6 +45,11 @@ class FirebaseController extends GetxController {
 
       user.value = userCredential.user;
       isSignedIn.value = true;
+
+      if (isSignedIn.value) {
+        Get.toNamed(AppRoot.dashboard);
+
+      }
     } catch (e) {
       print("Error signing in with Google: $e");
     }
