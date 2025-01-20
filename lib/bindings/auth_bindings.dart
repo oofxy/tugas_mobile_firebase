@@ -1,8 +1,10 @@
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:tugas_mobile_firebase/controllers/auth_controller.dart';
 import 'package:tugas_mobile_firebase/controllers/dashboard_controller.dart';
 import 'package:tugas_mobile_firebase/controllers/notification_controller.dart';
 import 'package:tugas_mobile_firebase/controllers/reminder_controller.dart';
+import 'package:tugas_mobile_firebase/services/firestore_service.dart';
 
 class ReminderBinding extends Bindings {
   @override

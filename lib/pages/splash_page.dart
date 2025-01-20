@@ -4,6 +4,8 @@ import 'package:tugas_mobile_firebase/controllers/auth_controller.dart';
 import 'package:tugas_mobile_firebase/route/app_route.dart';
 
 class SplashPage extends StatelessWidget {
+  const SplashPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     final FirebaseController firebaseController = Get.find();
@@ -20,7 +22,7 @@ class SplashPage extends StatelessWidget {
           Get.offNamed(AppRoot.login);
         });
       }
-      return Scaffold(
+      return const Scaffold(
         body: Center(child: CircularProgressIndicator()),
       );
     });

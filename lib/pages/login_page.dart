@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tugas_mobile_firebase/controllers/auth_controller.dart';
 
-import '../route/app_route.dart';
 
 class LoginPage extends StatelessWidget {
   final FirebaseController firebaseController = Get.find();
+
+  LoginPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +15,7 @@ class LoginPage extends StatelessWidget {
       body: Stack(
         children: [
           Container(
-            padding: EdgeInsets.only(top: 230, right: 40),
+            padding: const EdgeInsets.only(top: 230, right: 40),
             child: Positioned.fill(
                 child: Transform.scale(
                     scale: 2.4,
@@ -23,22 +24,22 @@ class LoginPage extends StatelessWidget {
           Align(
             alignment: Alignment.centerLeft,
             child: Padding(
-              padding: EdgeInsets.only(left: 30.0),
+              padding: const EdgeInsets.only(left: 30.0),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
+                  const Text(
                     "quiqiNoteg",
                     style: TextStyle(
                         fontSize: 30,
                         fontFamily: 'Inconsolata',
                         fontWeight: FontWeight.w900),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
-                  Text(
+                  const Text(
                     "A note where we strive    for better future.",
                     style: TextStyle(
                       fontSize: 19,
@@ -48,14 +49,14 @@ class LoginPage extends StatelessWidget {
                     ),
                   ),
 
-                  SizedBox(height: 40), // Add spacing between text and button
+                  const SizedBox(height: 40), // Add spacing between text and button
                   OutlinedButton(
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Color(0xFFF2F9FB),
-                      side: BorderSide(color: Color(0xFFE6F3F7)),
+                      backgroundColor: const Color(0xFFF2F9FB),
+                      side: const BorderSide(color: Color(0xFFE6F3F7)),
                       padding:
-                          EdgeInsets.symmetric(vertical: 13, horizontal: 20),
-                      shape: RoundedRectangleBorder(
+                          const EdgeInsets.symmetric(vertical: 13, horizontal: 20),
+                      shape: const RoundedRectangleBorder(
                         // Set square corners
                         borderRadius: BorderRadius.all(Radius.circular(5)),
                       ),
@@ -71,8 +72,8 @@ class LoginPage extends StatelessWidget {
                         width: 37.0,
                         height: 37.0,
                       ),
-                      SizedBox(width: 10,),
-                      Text(
+                      const SizedBox(width: 10,),
+                      const Text(
                         'Sign In with Google',
                         style: TextStyle(
                             color: Colors.black,
@@ -81,7 +82,7 @@ class LoginPage extends StatelessWidget {
                       )
                     ]),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 15,
                   )
                 ],

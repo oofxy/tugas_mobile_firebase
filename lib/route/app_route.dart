@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:tugas_mobile_firebase/bindings/auth_bindings.dart';
+import 'package:tugas_mobile_firebase/pages/home_page.dart';
 import 'package:tugas_mobile_firebase/pages/note_page.dart';
 import 'package:tugas_mobile_firebase/pages/profile_page.dart';
 import 'package:tugas_mobile_firebase/pages/login_page.dart';
@@ -14,18 +15,19 @@ class AppRoot {
   static const profile = '/profile';
   static const reminder = '/reminder';
   static const note = '/note';
+  static const home = '/home';
 }
 
 class AppPages {
   static final pages = [
     GetPage(
       name: AppRoot.dashboard,
-      page: () => Dashboard(),
+      page: () => const Dashboard(),
       binding: DashboardBindings(),
     ),
     GetPage(
       name: AppRoot.splash,
-      page: () => SplashPage(),
+      page: () => const SplashPage(),
       binding: AuthBindings(),
     ),
     GetPage(
@@ -45,8 +47,13 @@ class AppPages {
     ),
     GetPage(
       name: AppRoot.note,
-      page: () => NotePage(),
+      page: () => const NotePage(),
       binding: DashboardBindings(),
     ),
+    GetPage(
+        name: AppRoot.home,
+        page: () => HomePage(),
+        binding: AuthBindings()
+    )
   ];
 }

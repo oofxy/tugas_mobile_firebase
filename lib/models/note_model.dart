@@ -1,7 +1,13 @@
 class NoteModel {
-  final String text;
-  final String title;
-  final DateTime? reminderDate;
+  final String id;
+  final String title; // Title berasal dari "note"
+  final String note; // Note berasal dari "content"
+  final DateTime timestamp;
 
-  NoteModel({required this.text, required this.title, this.reminderDate});
+  NoteModel({
+    required this.id,
+    required this.title,
+    required this.note,
+    required this.timestamp,
+  });
 }
