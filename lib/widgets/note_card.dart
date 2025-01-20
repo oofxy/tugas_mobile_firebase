@@ -10,8 +10,9 @@ class NoteCard extends StatelessWidget {
   final String title;
   final String note;
   final DateTime timestamp;
+  final VoidCallback ontap;
 
-  NoteCard({super.key, required this.title, required this.note, required this.timestamp});
+  NoteCard({super.key, required this.title, required this.note, required this.timestamp, required this.ontap});
 
   final ValueNotifier<bool> _isHighlighted = ValueNotifier(false);
 
@@ -73,7 +74,9 @@ class NoteCard extends StatelessWidget {
               onHighlightChanged: (isHighlighted) {
                 _isHighlighted.value = isHighlighted;
               },
-              onTap: () {},
+              onTap: () {
+                ontap();
+              },
               child: Container(
                 padding: const EdgeInsets.all(2),
                 color: Colors.white,

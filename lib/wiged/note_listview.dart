@@ -13,7 +13,6 @@ class NoteListview extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final DashboardController dashboardController = Get.find();
     final FirestoreService firestoreService = FirestoreService();
     return Scaffold(
       body: StreamBuilder<QuerySnapshot>(
@@ -37,22 +36,28 @@ class NoteListview extends StatelessWidget {
                 String docID = document.id;
 
                 // Map data to NoteModel
-                Map<String, dynamic> data = document.data() as Map<String, dynamic>;
+                Map<String, dynamic> data =
+                    document.data() as Map<String, dynamic>;
                 NoteModel model = NoteModel(
                   id: docID,
-                  title: data['note'] ?? "Untitled", // "note" is now the title
-                  note: data['content'] ?? "", // "content" is now the note content
+                  title: data['note'] ?? "", // "note" is now the title
+                  note: data['content'] ??
+                      "", // "content" is now the note content
                   timestamp: (data['timestamp'] as Timestamp).toDate(),
                 );
 
                 return GestureDetector(
-                  onTap: () {
-                    Get.toNamed(AppRoot.note, arguments: [{"docId": docID}]);
-                  },
+                  onTap: () {},
                   child: NoteCard(
-                      title: model.title,
-                      note: model.note,
-                      timestamp: model.timestamp,
+                    ontap: () async {
+                      Get.toNamed(AppRoot.note, arguments: [
+                        {"docId": docID}
+                      ]);
+                      await firestoreService.deleteEmptyNotes();
+                    },
+                    title: model.title,
+                    note: model.note,
+                    timestamp: model.timestamp,
                   ),
                 );
               },

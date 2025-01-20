@@ -28,6 +28,7 @@ class NotePage extends StatelessWidget {
                 IconButton(
                   onPressed: () {
                     firestoreService.updateContent(docId, title.text, content.text);
+                    firestoreService.deleteEmptyNotes(); // Hapus catatan kosong
                   },
                   icon: SvgPicture.asset(
                     'lib/assets/images/icons/icon-park-outline_hard-disk-one.svg',
@@ -69,7 +70,7 @@ class NotePage extends StatelessWidget {
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             final noteData = snapshot.data!;
-          title = TextEditingController(text: noteData['note'] ?? 'Untitled');
+          title = TextEditingController(text: noteData['note'] ?? '');
             content = TextEditingController(text: noteData['content'] ?? 'No content available.');
 
             return Padding(

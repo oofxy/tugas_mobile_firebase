@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tugas_mobile_firebase/controllers/auth_controller.dart';
+import 'package:tugas_mobile_firebase/pages/note_page.dart';
 import 'package:tugas_mobile_firebase/services/firestore_service.dart';
 import 'package:tugas_mobile_firebase/style/colors.dart';
 import 'package:tugas_mobile_firebase/wiged/note_listview.dart';
@@ -63,44 +64,30 @@ class HomePage extends StatelessWidget {
               child: NoteListview(),
             ),
           ],
+        ),floatingActionButton: Padding(
+      padding: const EdgeInsets.only(
+          bottom: 20.0,
+          right: 20.0), // Menambahkan jarak dari bawah dan kanan
+      child: SizedBox(
+        width: 70.0, // Ukuran lebar tombol
+        height: 70.0, // Ukuran tinggi tombol
+        child: FloatingActionButton(
+          onPressed: () async {
+            final FirestoreService firestoreService = FirestoreService();
+
+            // Buat catatan kosong di Firestore
+            final String newDocId = await firestoreService.createEmptyNote();
+
+            // Navigasi ke NotePage dengan docId baru
+            Get.to(() => const NotePage(), arguments: [{'docId': newDocId}]);
+          },
+          backgroundColor: AppColors.tertiary,
+          child: const Icon(Icons.add,
+              color: Colors.white, size: 40.0), // Ukuran ikon diperbesar
+          shape: const CircleBorder(), // Menjaga tombol tetap bulat
         ),
-        floatingActionButton: Padding(
-          padding: const EdgeInsets.only(
-              bottom: 20.0,
-              right: 20.0), // Menambahkan jarak dari bawah dan kanan
-          child: SizedBox(
-            width: 70.0, // Ukuran lebar tombol
-            height: 70.0, // Ukuran tinggi tombol
-            child: FloatingActionButton(
-              onPressed: () {
-                showDialog(
-                  context: context,
-                  builder: (context) => AlertDialog(
-                    content: TextField(
-                      controller: noteController,
-                       decoration: const InputDecoration(
-                        hintText: "Enter your note",
-                      ),
-                    ),
-                    actions: [
-                      ElevatedButton(
-                        onPressed: () {
-                          firestoreService.addNote(noteController.text);
-                          noteController.clear();
-                          Navigator.of(context).pop();
-                        },
-                        child: const Text("Add"),
-                      ),
-                    ],
-                  ),
-                );
-              },
-              backgroundColor: AppColors.tertiary,
-              child: const Icon(Icons.add,
-                  color: Colors.white, size: 40.0), // Ukuran ikon diperbesar
-              shape: CircleBorder(), // Menjaga tombol tetap bulat
-            ),
-          ),
-        ));
+      ),
+    )
+    );
   }
 }
