@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tugas_mobile_firebase/controllers/auth_controller.dart';
+import 'package:tugas_mobile_firebase/style/colors.dart';
 
 import '../route/app_route.dart';
 
@@ -79,8 +80,8 @@ class ProfilePage extends StatelessWidget {
               ),
               OutlinedButton(
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Color(0xFFF8F8F8),
-                  side: BorderSide(color: Color(0xFFF1F1F1)),
+                  backgroundColor: Color(AppColors.secondaryButtonColour.value),
+                  side: BorderSide(color: Color(AppColors.secondaryBorderButtonColour.value)),
                   padding: EdgeInsets.symmetric(vertical: 20, horizontal: 20),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.all(Radius.circular(5)),
@@ -109,8 +110,8 @@ class ProfilePage extends StatelessWidget {
               ),
               OutlinedButton(
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Color(0xFFF8F8F8),
-                  side: BorderSide(color: Color(0xFFF1F1F1)),
+                  backgroundColor: Color(AppColors.secondaryButtonColour.value),
+                  side: BorderSide(color: Color(AppColors.secondaryBorderButtonColour.value)),
                   padding: EdgeInsets.symmetric(vertical: 13, horizontal: 20),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.all(Radius.circular(5)),
