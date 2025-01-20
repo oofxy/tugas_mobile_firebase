@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:tugas_mobile_firebase/bindings/auth_bindings.dart';
+import 'package:tugas_mobile_firebase/pages/note_page.dart';
 import 'package:tugas_mobile_firebase/pages/profile_page.dart';
 import 'package:tugas_mobile_firebase/pages/login_page.dart';
 import 'package:tugas_mobile_firebase/pages/reminder_form.dart';
@@ -12,6 +13,7 @@ class AppRoot {
   static const login = '/login';
   static const profile = '/profile';
   static const reminder = '/reminder';
+  static const note = '/note';
 }
 
 class AppPages {
@@ -40,6 +42,11 @@ class AppPages {
       name: AppRoot.reminder,
       page: () => ReminderForm(),
       binding: ReminderBinding(),
+    ),
+    GetPage(
+      name: AppRoot.note,
+      page: () => NotePage(),
+      binding: DashboardBindings(),
     ),
   ];
 }

@@ -1,12 +1,17 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:tugas_mobile_firebase/route/app_route.dart';
 import 'package:tugas_mobile_firebase/services/firestore_service.dart';
+
+import '../controllers/dashboard_controller.dart';
 
 class NoteListview extends StatelessWidget {
   const NoteListview({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final DashboardController dashboardController = Get.find();
     final TextEditingController noteController = TextEditingController();
     final FirestoreService firestoreService = FirestoreService();
     return Scaffold(
@@ -29,6 +34,9 @@ class NoteListview extends StatelessWidget {
 
                   return ListTile(
                     title: Text(noteText),
+                    onTap: () {
+                      Get.toNamed(AppRoot.note, arguments: [{"docId" : docID}]);
+                    },
                     trailing: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [

@@ -16,11 +16,9 @@ class HomePage extends StatelessWidget {
       ),
       body: Column(
         children: [
-          // Tampilkan NoteListview di bagian atas
           const Expanded(
             child: NoteListview(),
           ),
-          // Tombol tambah catatan
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: ElevatedButton(
