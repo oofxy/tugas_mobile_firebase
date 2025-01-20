@@ -8,6 +8,14 @@ import '../style/colors.dart';
 import 'note_card_popup.dart';
 
 class NoteCard extends StatelessWidget {
+  // Menerima title, note, dan timestamp sebagai final parameter
+  final String title;
+  final String note;
+  final DateTime timestamp;
+  final VoidCallback ontap;
+
+  NoteCard({super.key, required this.title, required this.note, required this.timestamp, required this.ontap});
+
   final ValueNotifier<bool> _isHighlighted = ValueNotifier(false);
 
   void _showCustomDialog(BuildContext context, GlobalKey widgetKey) {
@@ -61,9 +69,7 @@ class NoteCard extends StatelessWidget {
           return Material(
             child: Container(
               key: widgetKey,
-              constraints:  BoxConstraints(
-                  minHeight: 184
-              ),
+              constraints:  BoxConstraints(minHeight: 184),
               width: 173.5,
               child: InkWell(
                 splashColor: Colors.transparent,
@@ -72,7 +78,9 @@ class NoteCard extends StatelessWidget {
                   _showCustomDialog(context, widgetKey);
                   _isHighlighted.value = true;
                 },
-                onTap: () {},
+                onTap: () {
+                  ontap();
+                },
                 child: Container(
                   padding: EdgeInsets.all(2),
                   color: Colors.white,
@@ -88,9 +96,7 @@ class NoteCard extends StatelessWidget {
                         borderRadius: BorderRadius.all(Radius.circular(8))
                     ),
                     child: Container(
-                      constraints: BoxConstraints(
-                        minHeight: 176.0,
-                      ),
+                      constraints: BoxConstraints(minHeight: 176.0),
                       width: 165.5,
                       child: Stack(
                         children: [
@@ -116,16 +122,14 @@ class NoteCard extends StatelessWidget {
                                 color: isHighlighted ? AppColors.primaryHighlighted : AppColors.primary,
                                 borderRadius: BorderRadius.all(Radius.circular(5))
                             ),
-                            constraints: BoxConstraints(
-                              minHeight: 176.0,
-                            ),
+                            constraints: BoxConstraints(minHeight: 176.0),
                             width: 165.5,
                             child: Column(
                               mainAxisSize: MainAxisSize.min,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  "Les Tittle.",
+                                  title,
                                   style: TextStyle(
                                       fontFamily: "Montserrat",
                                       fontWeight: FontWeight.w700,
@@ -141,7 +145,7 @@ class NoteCard extends StatelessWidget {
                                 Container(
                                   constraints: BoxConstraints(minHeight: 84.0),
                                   child: Text(
-                                    "wen ome cha in sama tuma har bisaun. wi felin loof ese lifter brau.",
+                                    note,
                                     style: TextStyle(
                                         fontFamily: "Montserrat",
                                         fontWeight: FontWeight.w300,
@@ -156,7 +160,7 @@ class NoteCard extends StatelessWidget {
                                     crossAxisAlignment: CrossAxisAlignment.center,
                                     children: [
                                       Text(
-                                        "Sep 11th 2001",
+                                        "${timestamp.day}/${timestamp.month}/${timestamp.year}",
                                         style: TextStyle(
                                             fontFamily: "Montserrat",
                                             fontWeight: FontWeight.w300,

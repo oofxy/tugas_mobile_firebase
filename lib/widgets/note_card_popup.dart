@@ -3,13 +3,15 @@ import 'package:flutter/material.dart';
 import '../style/colors.dart';
 
 class NoteCardPopup extends StatelessWidget {
+  const NoteCardPopup({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(1),
+      padding: const EdgeInsets.all(1),
       height: 92,
       width: 155,
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
           borderRadius: BorderRadius.all(Radius.circular(10)),
           color: Colors.transparent
       ),
@@ -21,13 +23,13 @@ class NoteCardPopup extends StatelessWidget {
               onTap: () {},
               child: Container(
                 color: AppColors.secondary,
-                padding: EdgeInsets.only(
+                padding: const EdgeInsets.only(
                     top: 13,
                     left: 13,
                     right: 13,
                     bottom: 14
                 ),
-                child: Row(
+                child: const Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Icon(Icons.timer, size: 16.0, color: Colors.black),
@@ -52,13 +54,13 @@ class NoteCardPopup extends StatelessWidget {
               onTap: () {},
               child: Container(
                 color: AppColors.secondary,
-                padding: EdgeInsets.only(
+                padding: const EdgeInsets.only(
                     top: 14,
                     left: 13,
                     right: 13,
                     bottom: 13
                 ),
-                child: Row(
+                child: const Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Icon(Icons.delete, size: 16.0, color: AppColors.warning,),

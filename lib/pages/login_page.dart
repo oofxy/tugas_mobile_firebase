@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:tugas_mobile_firebase/controllers/auth_controller.dart';
 import 'package:tugas_mobile_firebase/style/colors.dart';
 
-import '../route/app_route.dart';
 
 class LoginPage extends StatelessWidget {
   final FirebaseController firebaseController = Get.find();

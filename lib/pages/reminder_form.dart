@@ -9,6 +9,8 @@ class ReminderForm extends StatelessWidget {
   final TextEditingController _descriptionController = TextEditingController();
   final Rxn<DateTime> _selectedDateTime = Rxn<DateTime>();
 
+  ReminderForm({super.key});
+
   void _selectDateTime(BuildContext context) async {
     final DateTime? pickedDate = await showDatePicker(
         context: context,
@@ -46,16 +48,16 @@ class ReminderForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Add Reminder")),
+      appBar: AppBar(title: const Text("Add Reminder")),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
             TextField(
               controller: _descriptionController,
-              decoration: InputDecoration(labelText: "Description"),
+              decoration: const InputDecoration(labelText: "Description"),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             Obx(() => Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -66,14 +68,14 @@ class ReminderForm extends StatelessWidget {
                 ),
                 TextButton(
                   onPressed: () => _selectDateTime(context),
-                  child: Text("Select Date & Time"),
+                  child: const Text("Select Date & Time"),
                 ),
               ],
             )),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             ElevatedButton(
               onPressed: _submitForm,
-              child: Text("Add Reminder"),
+              child: const Text("Add Reminder"),
             ),
           ],
         ),
