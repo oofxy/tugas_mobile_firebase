@@ -81,7 +81,9 @@ flutter:
       fonts:
         - asset: lib/assets/fonts/Inconsolata_ExtraExpanded-Regular.ttf
   # To add assets to your application, add an assets section, like this:
-  # assets:
+  assets:
+    - lib/assets/images/background.png
+    - lib/assets/images/google_logo.png
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
 
