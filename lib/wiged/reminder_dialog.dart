@@ -1,9 +1,54 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:tugas_mobile_firebase/wiged/textfield.dart';
 
+import '../controllers/reminder_controller.dart';
 import '../style/colors.dart';
 
+
+
 void showReminderDialog(BuildContext context, TextEditingController noteController) {
+
+  final ReminderController _controller = Get.put(ReminderController());
+  final TextEditingController _descriptionController = TextEditingController();
+  final Rxn<DateTime> _selectedDateTime = Rxn<DateTime>();
+
+  void _selectDateTime(BuildContext context) async {
+    final DateTime? pickedDate = await showDatePicker(
+        context: context,
+        initialDate: DateTime.now(),
+        firstDate: DateTime.now(),
+        lastDate: DateTime(2100)
+    );
+    if (pickedDate != null) {
+      final TimeOfDay? pickedTime = await showTimePicker(
+        context: context,
+        initialTime: TimeOfDay.now(),
+      );
+      if (pickedTime != null) {
+        _selectedDateTime.value = DateTime(
+            pickedDate.year,
+            pickedDate.month,
+            pickedDate.day,
+            pickedTime.hour,
+            pickedTime.minute
+        );
+      }
+    }
+  }
+
+  void _submitForm() {
+    if (_selectedDateTime.value != null && _descriptionController.text.isNotEmpty) {
+      Navigator.of(context, rootNavigator: true).pop(context);
+      _controller.addReminder(_selectedDateTime.value!, _descriptionController.text);
+      _descriptionController.clear();
+      _selectedDateTime.value = null;
+    } else {
+      Get.snackbar("Error", "Please fill out all fields");
+    }
+  }
+
   showModalBottomSheet(
       context: context,
       builder: (context) => Container(
@@ -43,6 +88,7 @@ void showReminderDialog(BuildContext context, TextEditingController noteControll
             Material(
               child: mainTextField(
                 hintText: "Enter description.",
+                controller: _descriptionController,
               ),
             ),
             SizedBox(height: 14),
@@ -50,7 +96,8 @@ void showReminderDialog(BuildContext context, TextEditingController noteControll
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  "No date selected.",
+                  _selectedDateTime.value != null
+                  ? DateFormat.yMd().add_jm().format(_selectedDateTime.value!) : "No date selected",
                   style: TextStyle(
                     color: Colors.black,
                     fontSize: 14,
@@ -68,8 +115,7 @@ void showReminderDialog(BuildContext context, TextEditingController noteControll
                       borderRadius: BorderRadius.all(Radius.circular(5)),
                     ),
                   ),
-                  onPressed: () {
-                  },
+                  onPressed: () => _selectDateTime(context),
                   child: Text(
                     'Select date & time',
                     style: TextStyle(
@@ -92,8 +138,7 @@ void showReminderDialog(BuildContext context, TextEditingController noteControll
                     borderRadius: BorderRadius.all(Radius.circular(5)),
                   ),
                 ),
-                onPressed: () {
-                },
+                onPressed: _submitForm,
                 child: Container(
                   width: double.infinity,
                   child: Center(

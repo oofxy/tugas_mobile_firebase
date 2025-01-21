@@ -46,7 +46,7 @@ class AppPages {
     GetPage(
       name: AppRoot.note,
       page: () => NotePage(),
-      binding: DashboardBindings(),
+      binding: NoteBindings(),
     ),
   ];
 }
