@@ -15,7 +15,7 @@ class SplashPage extends StatelessWidget {
       if (firebaseController.isSignedIn.value) {
         // Ensure navigation happens only once
         WidgetsBinding.instance.addPostFrameCallback((_) {
-          Get.offNamed(AppRoot.dashboard);
+          Get.offNamed(AppRoot.home);
         });
       } else {
         WidgetsBinding.instance.addPostFrameCallback((_) {

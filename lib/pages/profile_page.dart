@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:tugas_mobile_firebase/controllers/auth_controller.dart';
 import 'package:tugas_mobile_firebase/style/colors.dart';
@@ -14,6 +15,16 @@ class ProfilePage extends StatelessWidget {
       backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.white,
+        leading: Padding(
+          padding: EdgeInsets.only(left: 27),
+          child: IconButton(
+            onPressed: () => Get.back(),
+            icon: Transform.rotate(
+              angle: 90 * 3.14 / 180,
+              child: Icon(Icons.u_turn_left, size: 31),
+            ),
+          ),
+        ),
         actions: [
           Padding(
             padding: EdgeInsets.only(right: 23),
@@ -30,18 +41,6 @@ class ProfilePage extends StatelessWidget {
             ),
           ),
         ],
-        leading: Padding(
-          padding: EdgeInsets.only(left: 27),
-          child: IconButton(
-            onPressed: () {
-              // Add your onPressed logic here
-            },
-            icon: Transform.rotate(
-              angle: 90 * 3.14 / 180,
-              child: Icon(Icons.u_turn_left, size: 31),
-            ),
-          ),
-        ),
       ),
       body: Align(
         alignment: Alignment.topLeft,
@@ -66,23 +65,25 @@ class ProfilePage extends StatelessWidget {
                 style: TextStyle(
                     fontSize: 24,
                     fontFamily: 'Montserrat',
-                    fontWeight: FontWeight.bold),
+                    fontWeight: FontWeight.bold
+                ),
               ),
               Text(
                 '${firebaseController.user.value?.email ?? 'User@gmail.com'}',
                 style: TextStyle(
                     fontSize: 15,
                     fontFamily: 'Montserrat',
-                    color: Color(0xff808080)),
+                    color: AppColors.textSecondary
+                ),
               ),
               SizedBox(
                 height: 15,
               ),
               OutlinedButton(
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Color(AppColors.secondaryButtonColour.value),
-                  side: BorderSide(color: Color(AppColors.secondaryBorderButtonColour.value)),
-                  padding: EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+                  backgroundColor: AppColors.buttonSecondary,
+                  side: BorderSide(color: AppColors.borderButtonSecondary),
+                  padding: EdgeInsets.symmetric(vertical: 19, horizontal: 20),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.all(Radius.circular(5)),
                   ),
@@ -91,9 +92,10 @@ class ProfilePage extends StatelessWidget {
                 },
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Icon(Icons.restore_from_trash_outlined, color: Colors.redAccent, size: 35,),
-                    SizedBox(width: 10),
+                    SvgPicture.asset('lib/assets/images/icons/mdi_delete-empty-outline.svg'),
+                    SizedBox(width: 6),
                     Text(
                       'Clear all existing notes',
                       style: TextStyle(
@@ -110,26 +112,25 @@ class ProfilePage extends StatelessWidget {
               ),
               OutlinedButton(
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Color(AppColors.secondaryButtonColour.value),
-                  side: BorderSide(color: Color(AppColors.secondaryBorderButtonColour.value)),
+                  disabledBackgroundColor: AppColors.buttonSecondary,
+                  side: BorderSide(color: AppColors.borderButtonSecondary),
                   padding: EdgeInsets.symmetric(vertical: 13, horizontal: 20),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.all(Radius.circular(5)),
                   ),
                 ),
-                onPressed: () async {
-                },
+
+                onPressed: null,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    SizedBox(width: 10),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
                           'Changelog Version',
                           style: TextStyle(
-                            color: Colors.black45,
+                            color: AppColors.textSecondary,
                             fontSize: 17,
                             fontFamily: 'Montserrat',
                           ),
@@ -137,7 +138,7 @@ class ProfilePage extends StatelessWidget {
                         Text(
                           'v0.0.1alpha rev.1',
                           style: TextStyle(
-                            color: Colors.black,
+                            color: AppColors.textPrimary,
                             fontSize: 17,
                             fontFamily: 'Montserrat',
                           ),

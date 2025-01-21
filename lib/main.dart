@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
 import 'package:tugas_mobile_firebase/firebase_options.dart';
 import 'package:tugas_mobile_firebase/route/app_route.dart';

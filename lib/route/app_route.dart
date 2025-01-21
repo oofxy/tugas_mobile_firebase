@@ -1,12 +1,10 @@
 import 'package:get/get.dart';
-import 'package:tugas_mobile_firebase/bindings/auth_bindings.dart';
+import 'package:tugas_mobile_firebase/bindings/bindings.dart';
 import 'package:tugas_mobile_firebase/pages/home_page.dart';
 import 'package:tugas_mobile_firebase/pages/note_page.dart';
 import 'package:tugas_mobile_firebase/pages/profile_page.dart';
 import 'package:tugas_mobile_firebase/pages/login_page.dart';
-import 'package:tugas_mobile_firebase/pages/reminder_form.dart';
 import 'package:tugas_mobile_firebase/pages/splash_page.dart';
-import 'package:tugas_mobile_firebase/wiged/dashboard.dart';
 
 class AppRoot {
   static const dashboard = '/dashboard';
@@ -20,11 +18,6 @@ class AppRoot {
 
 class AppPages {
   static final pages = [
-    GetPage(
-      name: AppRoot.dashboard,
-      page: () => const Dashboard(),
-      binding: DashboardBindings(),
-    ),
     GetPage(
       name: AppRoot.splash,
       page: () => const SplashPage(),
@@ -41,13 +34,8 @@ class AppPages {
       binding: AuthBindings(),
     ),
     GetPage(
-      name: AppRoot.reminder,
-      page: () => ReminderForm(),
-      binding: ReminderBinding(),
-    ),
-    GetPage(
       name: AppRoot.note,
-      page: () => const NotePage(),
+      page: () => NotePage(),
       binding: DashboardBindings(),
     ),
     GetPage(

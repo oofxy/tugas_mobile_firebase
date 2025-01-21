@@ -2,7 +2,7 @@ class NoteModel {
   final String id;
   final String title; // Title berasal dari "note"
   final String note; // Note berasal dari "content"
-  final DateTime timestamp;
+  final String timestamp;
 
   NoteModel({
     required this.id,

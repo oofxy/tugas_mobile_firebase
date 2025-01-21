@@ -1,26 +1,14 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
 import 'package:tugas_mobile_firebase/route/app_route.dart';
-import 'package:tugas_mobile_firebase/style/colors.dart';
-import 'package:tugas_mobile_firebase/wiged/reminder_dialog.dart';
-import 'package:tugas_mobile_firebase/wiged/textfield.dart';
+import 'package:tugas_mobile_firebase/widgets/reminder_dialog.dart';
 
+import '../helpers/timestamp_helper.dart';
 import '../services/firestore_service.dart';
 
 class NotePage extends StatelessWidget {
   const NotePage({super.key});
-
-  String formatTimestamp(dynamic timestamp) {
-    if (timestamp == null) {
-      return 'Unknown Date';
-    } else {
-      final DateTime dateTime = (timestamp as Timestamp).toDate();
-      return DateFormat('MMMM d y, h:mm a').format(dateTime);
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -70,7 +58,7 @@ class NotePage extends StatelessWidget {
             padding: const EdgeInsets.only(left: 24),
             child: IconButton(
               onPressed: () {
-                Get.toNamed(AppRoot.dashboard);
+                Get.toNamed(AppRoot.home);
               },
               icon: Transform.rotate(
                 angle: 90 * 3.14 / 180,
@@ -112,7 +100,7 @@ class NotePage extends StatelessWidget {
                       ),
                       const SizedBox(height: 8),
                       Text(
-                        formatTimestamp(noteData['timestamp']),
+                        formatTimestamp(noteData['timestamp'], true),
                         style: const TextStyle(
                           color: Colors.black,
                           fontSize: 14,

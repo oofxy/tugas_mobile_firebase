@@ -1,7 +1,7 @@
 import 'package:blur/blur.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:tugas_mobile_firebase/helpers/timestamp_helper.dart';
 import 'package:tugas_mobile_firebase/models/note_model.dart';
 
 import '../style/colors.dart';
@@ -11,7 +11,7 @@ class NoteCard extends StatelessWidget {
   // Menerima title, note, dan timestamp sebagai final parameter
   final String title;
   final String note;
-  final DateTime timestamp;
+  final String timestamp;
   final VoidCallback ontap;
 
   NoteCard({super.key, required this.title, required this.note, required this.timestamp, required this.ontap});
@@ -68,9 +68,8 @@ class NoteCard extends StatelessWidget {
         builder: (context, isHighlighted, child) {
           return Material(
             child: Container(
+              width: MediaQuery.of(context).size.width / 2 - 28,
               key: widgetKey,
-              constraints:  BoxConstraints(minHeight: 184),
-              width: 173.5,
               child: InkWell(
                 splashColor: Colors.transparent,
                 highlightColor: Colors.transparent,
@@ -95,90 +94,62 @@ class NoteCard extends StatelessWidget {
                         color: Colors.white,
                         borderRadius: BorderRadius.all(Radius.circular(8))
                     ),
-                    child: Container(
-                      constraints: BoxConstraints(minHeight: 176.0),
-                      width: 165.5,
-                      child: Stack(
+                    child: AnimatedContainer(
+                      duration: Duration(milliseconds: 200),
+                      padding: EdgeInsets.all(14.0),
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                            width: 1,
+                            color: isHighlighted ? AppColors.borderPrimaryHighlighted1 : AppColors.borderPrimary
+                        ),
+                        color: isHighlighted ? AppColors.primaryHighlighted : AppColors.primary,
+                        borderRadius: BorderRadius.all(Radius.circular(5))
+                      ),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Positioned.fill(
-                            child: Container(
-                              padding: EdgeInsets.all(1),
-                              child: AnimatedContainer(
-                                duration: Duration(milliseconds: 200),
-                                decoration: BoxDecoration(
-                                    border: Border.all(
-                                        width: 1,
-                                        color: isHighlighted ? AppColors.borderPrimaryHighlighted1 : AppColors.borderPrimary
-                                    ),
-                                    borderRadius: BorderRadius.all(Radius.circular(5))
+                          Text(
+                            title,
+                            style: TextStyle(
+                                fontFamily: "Montserrat",
+                                fontWeight: FontWeight.w700,
+                                fontSize: 14.0
+                            ),
+                          ),
+                          SizedBox(height: 5.0),
+                          Container(
+                            child: Text(
+                              note,
+                              style: TextStyle(
+                                  fontFamily: "Montserrat",
+                                  fontWeight: FontWeight.w300,
+                                  fontSize: 14.0
+                              ),
+                              maxLines: 5,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                          ),
+                          SizedBox(height: 25.0),
+                          Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Text(
+                                timestamp,
+                                style: TextStyle(
+                                    fontFamily: "Montserrat",
+                                    fontWeight: FontWeight.w300,
+                                    fontSize: 14.0
                                 ),
                               ),
-                            ),
-                          ),
-                          AnimatedContainer(
-                            duration: Duration(milliseconds: 200),
-                            padding: EdgeInsets.all(14.0),
-                            decoration: BoxDecoration(
-                                color: isHighlighted ? AppColors.primaryHighlighted : AppColors.primary,
-                                borderRadius: BorderRadius.all(Radius.circular(5))
-                            ),
-                            constraints: BoxConstraints(minHeight: 176.0),
-                            width: 165.5,
-                            child: Column(
-                              mainAxisSize: MainAxisSize.min,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  title,
-                                  style: TextStyle(
-                                      fontFamily: "Montserrat",
-                                      fontWeight: FontWeight.w700,
-                                      fontSize: 14.0
-                                  ),
-                                ),
-                                Spacer(),
-                                GestureDetector(
-                                    onTap: () => _showCustomDialog(context, widgetKey),
-                                    child: Icon(Icons.more_vert, size: 18.0)
-                                ),
-                                SizedBox(height: 5.0),
-                                Container(
-                                  constraints: BoxConstraints(minHeight: 84.0),
-                                  child: Text(
-                                    note,
-                                    style: TextStyle(
-                                        fontFamily: "Montserrat",
-                                        fontWeight: FontWeight.w300,
-                                        fontSize: 14.0
-                                    ),
-                                  ),
-                                ),
-                                SizedBox(height: 25.0),
-                                Align(
-                                  alignment: Alignment.bottomCenter,
-                                  child: Row(
-                                    crossAxisAlignment: CrossAxisAlignment.center,
-                                    children: [
-                                      Text(
-                                        "${timestamp.day}/${timestamp.month}/${timestamp.year}",
-                                        style: TextStyle(
-                                            fontFamily: "Montserrat",
-                                            fontWeight: FontWeight.w300,
-                                            fontSize: 14.0
-                                        ),
-                                      ),
-                                      Spacer(),
-                                      Container(
-                                        width: 9.0,
-                                        height: 9.0,
-                                        decoration: BoxDecoration(shape: BoxShape.circle, color: Colors.red),
-                                      )
-                                    ],
-                                  ),
-                                )
-                              ],
-                            ),
-                          ),
+                              Spacer(),
+                              Container(
+                                width: 9.0,
+                                height: 9.0,
+                                decoration: BoxDecoration(shape: BoxShape.circle, color: Colors.red),
+                              )
+                            ],
+                          )
                         ],
                       ),
                     ),

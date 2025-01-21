@@ -29,20 +29,22 @@ class LoginPage extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "quiqiNoteg",
+                    "quiqiNote.g",
                     style: TextStyle(
                         fontSize: 30,
                         fontFamily: 'Inconsolata',
-                        fontWeight: FontWeight.w900),
+                        fontWeight: FontWeight.w900
+                    ),
                   ),
                   SizedBox(
                     height: 10,
                   ),
                   Text(
-                    "A note where we strive    for better future.",
+                    "A note where we strive\nfor better future.",
                     style: TextStyle(
                       fontSize: 19,
                       fontFamily: 'Inconsolata',
+                      fontWeight: FontWeight.w300,
                       color: Colors.black45,
                       height: 1, // Adjust this value to control the line height
                     ),
@@ -51,8 +53,8 @@ class LoginPage extends StatelessWidget {
                   SizedBox(height: 40), // Add spacing between text and button
                   OutlinedButton(
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Color(AppColors.primaryButtonColour.value),
-                      side: BorderSide(color: Color(AppColors.primaryBorderButtonColour.value)),
+                      backgroundColor: AppColors.buttonPrimary,
+                      side: BorderSide(color: AppColors.borderButtonPrimary),
                       padding:
                           EdgeInsets.symmetric(vertical: 13, horizontal: 20),
                       shape: RoundedRectangleBorder(

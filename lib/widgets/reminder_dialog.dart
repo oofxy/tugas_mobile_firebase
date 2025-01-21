@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tugas_mobile_firebase/wiged/textfield.dart';
+import 'package:tugas_mobile_firebase/widgets/textfield.dart';
 
 import '../style/colors.dart';
 

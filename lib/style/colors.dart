@@ -27,10 +27,10 @@ class AppColors {
   static const borderPrimaryHighlighted2 = Color(0x660183B7);
   static const borderSecondary = Color(0x0D0183B7);
   static const borderTertiary = Color(0x1AFFFFFF);
+  static const borderButtonPrimary = Color(0xFFE6F3F7);
+  static const borderButtonSecondary = Color(0xFFF1F1F1);
 
   // Button
-  static const primaryButtonColour = Color(0xFFF2F9FB);
-  static const primaryBorderButtonColour = Color(0xFFE6F3F7);
-  static const secondaryButtonColour = Color(0xFFF8F8F8);
-  static const secondaryBorderButtonColour = Color(0xFFF1F1F1);
+  static const buttonPrimary = Color(0xFFF2F9FB);
+  static const buttonSecondary = Color(0xFFF8F8F8);
 }
