@@ -3,6 +3,10 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:tugas_mobile_firebase/route/app_route.dart';
 import 'package:tugas_mobile_firebase/widgets/reminder_dialog.dart';
+import 'package:tugas_mobile_firebase/widgets/reminder_confirmation.dart';
+import 'package:tugas_mobile_firebase/widgets/reminder_dialog.dart';
+import 'package:tugas_mobile_firebase/widgets/textfield.dart';
+import 'package:tugas_mobile_firebase/style/colors.dart';
 
 import '../helpers/timestamp_helper.dart';
 import '../services/firestore_service.dart';
@@ -12,11 +16,12 @@ class NotePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     TextEditingController title = TextEditingController();
     TextEditingController content = TextEditingController();
     TextEditingController noteController = TextEditingController();
 
-    final FirestoreService firestoreService = FirestoreService();
+    final FirestoreService firestoreService = Get.find();
     final String docId = Get.arguments[0]['docId'];
 
     return Scaffold(
@@ -45,7 +50,14 @@ class NotePage extends StatelessWidget {
                     ),
                   ),
                   IconButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      dialogConfirmation(context, () async {
+                        Get.toNamed(AppRoot.home);
+                        await firestoreService.deleteNote(docId);
+                      }, () {
+                        Navigator.of(context, rootNavigator: true).pop(context);
+                      });
+                    },
                     icon: SvgPicture.asset(
                       'lib/assets/images/icons/mdi_delete-empty-outline.svg',
                     ),

@@ -5,11 +5,13 @@ import '../style/colors.dart';
 class mainTextField extends StatelessWidget {
   final String hintText;
   final IconData? prefixIcon;
-  const mainTextField({super.key, required this.hintText, this.prefixIcon});
+  final TextEditingController? controller;
+  const mainTextField({super.key, required this.hintText, this.prefixIcon, this.controller});
 
   @override
   Widget build(BuildContext context) {
     return TextField(
+      controller: controller != null ? controller : null,
       decoration: InputDecoration(
         hintText: hintText,
         hintStyle: TextStyle(

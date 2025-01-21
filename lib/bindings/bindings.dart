@@ -21,6 +21,13 @@ class AuthBindings extends Bindings {
   }
 }
 
+class NoteBindings extends Bindings{
+  @override
+  void dependencies() {
+    Get.put(FirestoreService());
+  }
+}
+
 class DashboardBindings extends Bindings {
   @override
   void dependencies() {
