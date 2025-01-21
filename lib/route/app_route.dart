@@ -41,7 +41,7 @@ class AppPages {
     GetPage(
         name: AppRoot.home,
         page: () => HomePage(),
-        binding: AuthBindings()
+        binding: NoteBindings()
     )
   ];
 }

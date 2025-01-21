@@ -1,10 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
+import 'package:tugas_mobile_firebase/widgets/reminder_confirmation.dart';
+import 'package:tugas_mobile_firebase/widgets/reminder_dialog.dart';
 
+import '../route/app_route.dart';
+import '../services/firestore_service.dart';
 import '../style/colors.dart';
 
 class NoteCardPopup extends StatelessWidget {
-  const NoteCardPopup({super.key});
+  NoteCardPopup({super.key, required this.docId});
+  final String docId;
+  TextEditingController noteController = TextEditingController();
+  final FirestoreService firestoreService = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +29,9 @@ class NoteCardPopup extends StatelessWidget {
           Material(
             color: AppColors.secondary,
             child: InkWell(
-              onTap: () {},
+              onTap: () {
+                showReminderDialog(context, noteController, docId);
+              },
               child: Container(
                 color: AppColors.secondary,
                 padding: const EdgeInsets.only(
@@ -51,10 +61,17 @@ class NoteCardPopup extends StatelessWidget {
           Material(
             color: AppColors.secondary,
             child: InkWell(
-              onTap: () {},
+              onTap: () {
+                dialogConfirmation(context, () async {
+                  Get.toNamed(AppRoot.home);
+                  await firestoreService.deleteNote(docId);
+                }, () {
+                  Navigator.of(context, rootNavigator: true).pop(context);
+                });
+              },
               child: Container(
                 color: AppColors.secondary,
-                padding: const EdgeInsets.only(
+                padding: EdgeInsets.only(
                     top: 14,
                     left: 13,
                     right: 13,

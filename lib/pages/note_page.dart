@@ -3,13 +3,10 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:tugas_mobile_firebase/route/app_route.dart';
 import 'package:tugas_mobile_firebase/widgets/reminder_dialog.dart';
-import 'package:tugas_mobile_firebase/widgets/reminder_confirmation.dart';
-import 'package:tugas_mobile_firebase/widgets/reminder_dialog.dart';
-import 'package:tugas_mobile_firebase/widgets/textfield.dart';
-import 'package:tugas_mobile_firebase/style/colors.dart';
 
 import '../helpers/timestamp_helper.dart';
 import '../services/firestore_service.dart';
+import '../widgets/reminder_confirmation.dart';
 
 class NotePage extends StatelessWidget {
   const NotePage({super.key});
@@ -25,61 +22,61 @@ class NotePage extends StatelessWidget {
     final String docId = Get.arguments[0]['docId'];
 
     return Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.white,
-          actions: [
-            Padding(
-              padding: const EdgeInsets.only(right: 24),
-              child: Row(
-                children: [
-                  IconButton(
-                    onPressed: () {
-                      firestoreService.updateContent(
-                          docId, title.text, content.text);
-                    },
-                    icon: SvgPicture.asset(
-                      'lib/assets/images/icons/icon-park-outline_hard-disk-one.svg',
-                    ),
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        actions: [
+          Padding(
+            padding: const EdgeInsets.only(right: 24),
+            child: Row(
+              children: [
+                IconButton(
+                  onPressed: () {
+                    firestoreService.updateContent(
+                        docId, title.text, content.text);
+                  },
+                  icon: SvgPicture.asset(
+                    'lib/assets/images/icons/icon-park-outline_hard-disk-one.svg',
                   ),
-                  IconButton(
-                    onPressed: () {
-                      showReminderDialog(context, noteController);
-                    },
-                    icon: SvgPicture.asset(
-                      'lib/assets/images/icons/mdi_clock.svg',
-                    ),
+                ),
+                IconButton(
+                  onPressed: () {
+                    showReminderDialog(context, noteController, docId);
+                  },
+                  icon: SvgPicture.asset(
+                    'lib/assets/images/icons/mdi_clock.svg',
                   ),
-                  IconButton(
-                    onPressed: () {
-                      dialogConfirmation(context, () async {
-                        Get.toNamed(AppRoot.home);
-                        await firestoreService.deleteNote(docId);
-                      }, () {
-                        Navigator.of(context, rootNavigator: true).pop(context);
-                      });
-                    },
-                    icon: SvgPicture.asset(
-                      'lib/assets/images/icons/mdi_delete-empty-outline.svg',
-                    ),
+                ),
+                IconButton(
+                  onPressed: () {
+                    dialogConfirmation(context, () async {
+                      Get.toNamed(AppRoot.home);
+                      await firestoreService.deleteNote(docId);
+                    }, () {
+                      Navigator.of(context, rootNavigator: true).pop(context);
+                    });
+                  },
+                  icon: SvgPicture.asset(
+                    'lib/assets/images/icons/mdi_delete-empty-outline.svg',
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
-          ],
-          leading: Padding(
-            padding: const EdgeInsets.only(left: 24),
-            child: IconButton(
-              onPressed: () {
-                Get.toNamed(AppRoot.home);
-              },
-              icon: Transform.rotate(
-                angle: 90 * 3.14 / 180,
-                child: const Icon(Icons.u_turn_left, size: 31),
-              ),
+          ),
+        ],
+        leading: Padding(
+          padding: const EdgeInsets.only(left: 24),
+          child: IconButton(
+            onPressed: () {
+              Get.toNamed(AppRoot.home);
+            },
+            icon: Transform.rotate(
+              angle: 90 * 3.14 / 180,
+              child: const Icon(Icons.u_turn_left, size: 31),
             ),
           ),
         ),
-        body: Expanded(
+      ),
+      body: Expanded(
             child: Container(
           color: Colors.white,
           child: FutureBuilder<Map<String, dynamic>>(

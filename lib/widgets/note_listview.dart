@@ -64,6 +64,7 @@ class NoteListview extends StatelessWidget {
                               ]);
                               await firestoreService.deleteEmptyNotes();
                             },
+                            docId: model.id,
                             title: model.title,
                             note: model.note,
                             timestamp: model.timestamp,
@@ -89,6 +90,7 @@ class NoteListview extends StatelessWidget {
                               ]);
                               await firestoreService.deleteEmptyNotes();
                             },
+                            docId: model.id,
                             title: model.title,
                             note: model.note,
                             timestamp: model.timestamp,

@@ -6,8 +6,7 @@ import 'package:intl/intl.dart';
 import '../controllers/reminder_controller.dart';
 import '../style/colors.dart';
 
-void showReminderDialog(BuildContext context, TextEditingController noteController) {
-
+void showReminderDialog(BuildContext context, TextEditingController noteController, String docId) {
   final ReminderController _controller = Get.put(ReminderController());
   final TextEditingController _descriptionController = TextEditingController();
   final Rxn<DateTime> _selectedDateTime = Rxn<DateTime>();
@@ -36,10 +35,10 @@ void showReminderDialog(BuildContext context, TextEditingController noteControll
     }
   }
 
-  void _submitForm() {
+  void _submitForm(String noteId) {
     if (_selectedDateTime.value != null && _descriptionController.text.isNotEmpty) {
-      Navigator.of(context, rootNavigator: true).pop(context);
-      _controller.addReminder(_selectedDateTime.value!, _descriptionController.text);
+      Get.back();
+      _controller.addReminder(_selectedDateTime.value!, _descriptionController.text, noteId);
       _descriptionController.clear();
       _selectedDateTime.value = null;
     } else {
@@ -95,7 +94,8 @@ void showReminderDialog(BuildContext context, TextEditingController noteControll
               children: [
                 Text(
                   _selectedDateTime.value != null
-                  ? DateFormat.yMd().add_jm().format(_selectedDateTime.value!) : "No date selected",
+                    ? DateFormat.yMd().add_jm().format(_selectedDateTime.value!)
+                    : "No date selected",
                   style: TextStyle(
                     color: Colors.black,
                     fontSize: 14,
@@ -136,7 +136,7 @@ void showReminderDialog(BuildContext context, TextEditingController noteControll
                     borderRadius: BorderRadius.all(Radius.circular(5)),
                   ),
                 ),
-                onPressed: _submitForm,
+                onPressed: () => _submitForm(docId),
                 child: Container(
                   width: double.infinity,
                   child: Center(

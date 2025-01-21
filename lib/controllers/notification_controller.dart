@@ -1,14 +1,16 @@
+import 'dart:convert';
 import 'dart:typed_data';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
+import 'package:tugas_mobile_firebase/route/app_route.dart';
 
 class NotificationController extends GetxController {
   final FirebaseMessaging _messaging = FirebaseMessaging.instance;
   final FlutterLocalNotificationsPlugin _localNotificationsPlugin = FlutterLocalNotificationsPlugin();
-  final FirebaseAnalytics _analytics = FirebaseAnalytics.instance;
+  String? route;
   String? token = '';
 
   Rx<RemoteMessage?> notification = Rx<RemoteMessage?>(null);
@@ -39,7 +41,13 @@ class NotificationController extends GetxController {
 
     FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
       if (message.data['route'] != null) {
-        // TODO: route stuff
+        Get.toNamed(AppRoot.note, arguments: [{"docId": message.data['route']}]);
+      }
+    });
+
+    _messaging.getInitialMessage().then((RemoteMessage? message) {
+      if (message != null && message.data['route'] != null) {
+        Get.toNamed(AppRoot.note, arguments: [{"docId": message.data['route']}]);
       }
     });
   }
@@ -48,12 +56,34 @@ class NotificationController extends GetxController {
     const AndroidInitializationSettings initializationSettingsAndroid = AndroidInitializationSettings('@mipmap/ic_launcher');
     const InitializationSettings initializationSettings = InitializationSettings(android: initializationSettingsAndroid);
 
-    _localNotificationsPlugin.initialize(initializationSettings);
+    _localNotificationsPlugin.initialize(
+      initializationSettings,
+      onDidReceiveNotificationResponse: (NotificationResponse response) {
+        if (route != null) {
+          Get.toNamed(AppRoot.note, arguments: [{"docId": route}]);
+        }
+      }
+    );
+
+    // Register notification channel
+    const AndroidNotificationChannel channel = AndroidNotificationChannel(
+      'channel_id', // Channel ID
+      'channel_name', // Channel Name
+      description: 'channel_description', // Channel Description
+      importance: Importance.high,
+    );
+
+    _localNotificationsPlugin
+        .resolvePlatformSpecificImplementation<
+        AndroidFlutterLocalNotificationsPlugin>()
+        ?.createNotificationChannel(channel);
   }
 
   void _showForegroundNotification(RemoteMessage message) async {
     final String? imageUrl = message.notification?.android?.imageUrl;
     print(imageUrl);
+
+    route = message.data['route'] ?? '';
 
     if (imageUrl != null) {
       // Download the image

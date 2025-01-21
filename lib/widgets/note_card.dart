@@ -12,9 +12,10 @@ class NoteCard extends StatelessWidget {
   final String title;
   final String note;
   final String timestamp;
+  final String docId;
   final VoidCallback ontap;
 
-  NoteCard({super.key, required this.title, required this.note, required this.timestamp, required this.ontap});
+  NoteCard({super.key, required this.title, required this.note, required this.timestamp, required this.ontap, required this.docId});
 
   final ValueNotifier<bool> _isHighlighted = ValueNotifier(false);
 
@@ -36,17 +37,17 @@ class NoteCard extends StatelessWidget {
             child: Stack(
               children: [
                 Positioned(
-                    top: position.dy + 5, // Top position of the widget
-                    right: MediaQuery.of(context).size.width - (position.dx + size.width) + 5,
-                    child: GestureDetector(
-                        onTap: () {},
-                        child: Stack(
-                          children: [
-                            Blur(child: Container(color: AppColors.secondary, width: 155, height: 92,), blur: 3),
-                            NoteCardPopup()
-                          ],
-                        )
+                  top: position.dy + 5, // Top position of the widget
+                  right: MediaQuery.of(context).size.width - (position.dx + size.width) + 5,
+                  child: GestureDetector(
+                    onTap: () {},
+                    child: Stack(
+                      children: [
+                        Blur(child: Container(color: AppColors.secondary, width: 155, height: 92,), blur: 3),
+                        NoteCardPopup(docId: docId)
+                      ],
                     )
+                  )
                 ),
               ],
             ),

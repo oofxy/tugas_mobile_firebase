@@ -19,13 +19,13 @@ class mainTextField extends StatelessWidget {
           fontSize: 14
         ),
         prefixIcon: prefixIcon != null ? Icon(prefixIcon) : null,
-        border: OutlineInputBorder(
+        enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10.0),
-          borderSide: BorderSide(color: Colors.white12),
+          borderSide: BorderSide(color: AppColors.borderPrimary),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10.0),
-          borderSide: BorderSide(color: AppColors.borderPrimaryHighlighted2, width: 2.0), // Border hitam saat fokus
+          borderSide: BorderSide(color: AppColors.onPrimary, width: 2.0), // Border hitam saat fokus
         ),
         filled: true,
         fillColor: AppColors.primary, // Background biru
