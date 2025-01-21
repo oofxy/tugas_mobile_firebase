@@ -47,8 +47,7 @@ class FirebaseController extends GetxController {
       isSignedIn.value = true;
 
       if (isSignedIn.value) {
-        Get.toNamed(AppRoot.dashboard);
-
+        Get.toNamed(AppRoot.home);
       }
     } catch (e) {
       print("Error signing in with Google: $e");
