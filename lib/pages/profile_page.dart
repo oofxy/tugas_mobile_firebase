@@ -119,7 +119,6 @@ class ProfilePage extends StatelessWidget {
                     borderRadius: BorderRadius.all(Radius.circular(5)),
                   ),
                 ),
-
                 onPressed: null,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,

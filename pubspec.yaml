@@ -79,7 +79,6 @@ flutter:
   # images
     - lib/assets/images/background.png
     - lib/assets/images/google_logo.png
-  # assets:
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
 
